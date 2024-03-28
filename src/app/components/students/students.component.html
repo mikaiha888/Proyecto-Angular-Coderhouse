@@ -1,0 +1,19 @@
+<div>
+    <div class="mx-4 mt-10 flex flex-row justify-between">
+        <h2 class="text-3xl font-bold">Lista de {{filter.approvedFiltered}}</h2>
+        <div class="text-sm text-indigo-600 flex flex-row gap-5">
+            <button (click)="setFilter('aprobados')" class="hover:text-indigo-900 hover:underline-offset-8">Filtrar por aprobados</button>
+            <button (click)="setFilter('desaprobados')" class="hover:text-indigo-900 hover:underline-offset-8">Filtrar por desaprobados</button>
+            <button (click)="resetFilter()" class="hover:text-indigo-900 hover:underline-offset-8">Borrar filtros</button>
+        </div>
+    </div>
+    <ul class="px-16 py-7 my-5 border rounded-2xl">
+        <li *ngFor="let student of students; trackBy: trackByFn" class="my-2 text-center flex flex-row justify-between gap-10">
+            <img src="student.image" alt="student.id" class="w-1/6 h-1/6 rounded-full" />
+            <span class="w-3/6">{{student.firstName + " " + student.lastName}}</span>
+            <span class="w-3/6">{{student.email}}</span>
+            <span class="w-1/6">{{student.grade}}</span>
+            <span [ngClass]="['w-40 px-2 text-sm leading-6 rounded-full', student.approved ? 'bg-green-500' : 'bg-red-500']">{{student.approved ? "Aprobado" : "Desaprobado"}}</span>
+        </li>
+    </ul>
+</div>

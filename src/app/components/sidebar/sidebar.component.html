@@ -1,0 +1,56 @@
+<div class="w-fit h-screen bg-white border-r shadow-sm">
+  <div class="h-full flex flex-col">
+    <header [ngClass]="['p-4 flex', expanded ? 'justify-between items-center' : 'justify-center']">
+      <h1 [ngClass]="['h-10 text-3xl text-indigo-800 font-bold overflow-hidden transition-all', expanded ? 'w-32 mx-2.5' : 'w-0']">Students</h1>
+      <button (click)="setExpanded()"  class="p-2.5 rounded-full bg-gray-50 hover:bg-gray-100">
+        <i-lucide [name]="getIconName()" size="19"></i-lucide>
+      </button>
+    </header>
+    <nav class="px-3 flex-1">
+      <ul>
+        <li
+          *ngFor="let navButton of navButtons; trackBy: trackByFn"
+          [ngClass]="['py-2 px-3.5 my-1.5 rounded-md font-medium flex justify-center items-center relative cursor-pointer transition-colors group',
+            expanded ? '' : '',
+            navButton.active
+              ? 'bg-gradient-to-tr from-indigo-200 to-indigo-100  text-indigo-800'
+              : 'hover:bg-indigo-50 text-gray-600']"
+        >
+          <i-lucide [name]="navButton.iconName" />
+          <span [ngClass]="['overflow-hidden transition-all', expanded ? 'w-52 ml-3' : 'w-0']">{{ navButton.name }}</span>
+          <div *ngIf="navButton.alert" [ngClass]="['w-2 h-2 rounded bg-indigo-400 absolute right-2', expanded ? '' : 'top-2']"></div>
+          <div *ngIf="!expanded" class="px-2 py-1 ml-6 rounded-md bg-indigo-100 text-indigo-800 text-sm invisible opacity-20 -translate-x-3 transition-all group-hover:visible group-hover:opacity-100 group-hover:-translate-x-0 absolute left-full">{{navButton.name}}</div>
+        </li>
+      </ul>  
+      <hr class="my-4" />
+      <ul>
+        <li
+          *ngFor="let sideButton of sideButtons; trackBy: trackByFn"
+          [ngClass]="['py-2 px-3 my-1.5 rounded-md font-medium flex items-center relative cursor-pointer transition-colors group',
+            sideButton.active
+              ? 'bg-gradient-to-tr from-indigo-200 to-indigo-100  text-indigo-800'
+              : 'hover:bg-indigo-50 text-gray-600']"
+        >
+          <i-lucide [name]="sideButton.iconName" />
+          <span [ngClass]="['overflow-hidden transition-all', expanded ? 'w-52 ml-3' : 'w-0']">{{ sideButton.name }}</span>
+          <div *ngIf="sideButton.alert" [ngClass]="['w-2 h-2 rounded bg-indigo-400 absolute right-2', expanded ? '' : 'top-2']"></div>
+          <div *ngIf="!expanded" class="px-2 py-1 ml-6 rounded-md bg-indigo-100 text-indigo-800 text-sm invisible opacity-20 -translate-x-3 transition-all group-hover:visible group-hover:opacity-100 group-hover:-translate-x-0 absolute left-full">{{sideButton.name}}</div>
+        </li>
+      </ul>
+    </nav>
+    <div class="p-3 border-t flex">
+      <img
+        src="https://ui-avatars.com/api/?background=c7d2fe&color=3730a3&bold=true"
+        alt="user"
+        class="w-10 h-10 rounded-md"
+      />
+      <div [ngClass]="['flex justify-between items-center overflow-hidden transition-all', expanded ? 'w-52 ml-3' : 'w-0']">
+        <div class="leading-4">
+          <h4 class="font-semibold">John Doe</h4>
+          <span class="text-xs text-gray-600">{{ "johndoe@gmail.com" }}</span>
+        </div>
+        <i-lucide name="moreVertical" size="20" class="cursor-pointer" />
+      </div>
+    </div>
+  </div>
+</div>
